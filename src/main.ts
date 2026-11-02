@@ -9,13 +9,21 @@ async function bootstrap() {
   // Global API Prefix
   app.setGlobalPrefix('api');
 
-  // CORS Configuration
-  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+  // CORS Configuration: allow all local origins (localhost, 127.0.0.1, LAN IPs) with credentials
   app.enableCors({
-    origin: [frontendUrl, 'http://localhost:3000', 'http://127.0.0.1:3000'],
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    origin: true,
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'X-Requested-With',
+      'Accept',
+      'RSC',
+      'Next-Router-State-Tree',
+      'Next-Router-Prefetch',
+      'Next-Url',
+    ],
   });
 
   // Global DTO Validation Pipe
